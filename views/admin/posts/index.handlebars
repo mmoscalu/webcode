@@ -1,1 +1,23 @@
 <h1>Всі записи</h1>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Заголовок</th>
+            <th>Статус</th>
+            <th>Редагування</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each posts}}
+        <tr>
+            <td>{{id}}</td>
+            <td>{{title}}</td>
+            <td>{{status}}</td>
+            <td><a href="/admin/posts/edit/{{id}}"
+                   class="btn btn-info">Редагувати</a></td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>

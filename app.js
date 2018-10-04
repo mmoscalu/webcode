@@ -4,6 +4,7 @@ const path = require('path');
 const expressHandlebars = require('express-handlebars');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const methodOverride = require('method-override');
 
 mongoose.Promise = global.Promise;
 
@@ -18,13 +19,20 @@ mongoose.connect('mongodb://localhost:27017/web_design_db', {
 app.use(express.static(path.join(__dirname, 'public')));
 
 // set View Engine
-app.engine('handlebars', expressHandlebars({defaultLayout: 'home'}));
+
+const {select} = require('./helpers/handlebars-helpers'); // get helpers function
+
+app.engine('handlebars', expressHandlebars({defaultLayout: 'home', helpers: {select: select}}));
 app.set('view engine', 'handlebars');
 
 // set body parser
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
+
+// Method Override
+
+app.use(methodOverride('_method'));
 
 // listen port
 app.listen(4500, () => {
