@@ -2,21 +2,31 @@
 
 <table class="table table-bordered">
     <thead>
-        <tr>
-            <th>ID</th>
+        <tr class="text-center">
             <th>Заголовок</th>
+            <th>Зображення</th>
             <th>Статус</th>
+            <th>ID</th>
             <th>Редагування</th>
+            <th>Видалення</th>
         </tr>
     </thead>
     <tbody>
         {{#each posts}}
         <tr>
-            <td>{{id}}</td>
-            <td>{{title}}</td>
-            <td>{{status}}</td>
-            <td><a href="/admin/posts/edit/{{id}}"
+            <td class="align-middle">{{title}}</td>
+            <td><img class="img-thumbnail" src="/uploads/img/{{file}}" alt="{{file}}"></td>
+            <td class="align-middle">{{status}}</td>
+            <td class="align-middle">{{id}}</td>
+            <td class="align-middle"><a href="/admin/posts/edit/{{id}}"
                    class="btn btn-info">Редагувати</a></td>
+            <td class="align-middle">
+
+                <form action="/admin/posts/{{id}}?_method=DELETE" method="post">
+                    <button type="submit" class="btn btn-danger">Видалити</button>
+                </form>
+
+            </td>
         </tr>
         {{/each}}
     </tbody>

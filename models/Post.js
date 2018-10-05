@@ -13,6 +13,9 @@ const PostSchema = new Schema({
     description: {
         type: String,
         require: true
+    },
+    file: {
+        type: String
     }
 
 });
