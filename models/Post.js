@@ -15,8 +15,14 @@ const PostSchema = new Schema({
         require: true
     },
     file: {
-        type: String
-    }
+        type: String,
+        require: true
+    },
+    date: {
+        type: Date,
+        default: Date.now()
+    },
+
 
 });
 

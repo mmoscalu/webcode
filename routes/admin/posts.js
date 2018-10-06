@@ -3,7 +3,6 @@ const router = express.Router();
 const Post = require('../../models/Post');
 const { isEmpty, uploadDir } = require('../../helpers/upload-helpers');
 const fs = require('fs');
-// const path = require('path');
 
 // set default admin layout router
 
@@ -34,34 +33,36 @@ router.get('/new', (req, res) => {
 
 router.post('/new', (req, res) => {
 
-    let filename = '';
+        let filename = '';
 
-    if (!isEmpty(req.files)) {
+        if (!isEmpty(req.files)) {
 
-        let file = req.files.file;
-        filename = Date.now() + '-' + file.name;
+            let file = req.files.file;
+            filename = Date.now() + '-' + file.name;
 
-        file.mv('./public/uploads/img/' + filename, (err) => {
-            if (err) throw err;
+            file.mv('./public/uploads/img/' + filename, (err) => {
+                if (err) throw err;
+            });
+
+        }
+
+        const newPost = Post({
+            title: req.body.title,
+            status: req.body.status,
+            description: req.body.description,
+            file: filename
         });
 
-    }
+        // save new post ob database
 
-    const newPost = Post({
-        title: req.body.title,
-        status: req.body.status,
-        description: req.body.description,
-        file: filename
-    });
+        newPost.save()
+            .then(savedPost => {
 
-    // save new post ob database
+                req.flash('success_message', `Запис ${savedPost.title} створенний успішно`);
 
-    newPost.save()
-        .then(savedPost => {
-
-            res.redirect('/admin/posts')
-        })
-        .catch(error => console.log('could not save post'));
+                res.redirect('/admin/posts')
+            })
+            .catch(error => console.log('could not save post'));
 
 });
 
@@ -85,8 +86,24 @@ router.put('/edit/:id', (req, res) => {
             post.status = req.body.status;
             post.description = req.body.description;
 
+            if (!isEmpty(req.files)) {
+
+                let file = req.files.file;
+                filename = Date.now() + '-' + file.name;
+                post.file = filename;
+
+                file.mv('./public/uploads/img/' + filename, (err) => {
+                    if (err) throw err;
+                });
+
+            }
+
             post.save().then(updatedPost => {
-               res.redirect('/admin/posts');
+
+                req.flash('success_message', `Запис ${post.title} успішно оновленно`);
+
+                res.redirect('/admin/posts');
+
             });
         });
 
@@ -100,8 +117,13 @@ router.delete('/:id', (req, res) => {
        .then(post => {
 
            fs.unlink(uploadDir + post.file, (err) => {
-               post.remove();
-               res.redirect('/admin/posts');
+               post.remove().then(deletedPost => {
+
+                   req.flash('success_message', `Запис ${post.title} успішно видаленно`);
+                   res.redirect('/admin/posts');
+
+               });
+
            });
 
        })

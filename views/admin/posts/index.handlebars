@@ -1,12 +1,12 @@
 <h1>Всі записи</h1>
-
 <table class="table table-bordered">
     <thead>
-        <tr class="text-center">
+        <tr class="text-center align-middle">
             <th>Заголовок</th>
             <th>Зображення</th>
+            <th>Дата створення</th>
             <th>Статус</th>
-            <th>ID</th>
+            <!--<th>ID</th>-->
             <th>Редагування</th>
             <th>Видалення</th>
         </tr>
@@ -16,8 +16,9 @@
         <tr>
             <td class="align-middle">{{title}}</td>
             <td><img class="img-thumbnail" src="/uploads/img/{{file}}" alt="{{file}}"></td>
+            <td class="align-middle">{{generateDate date 'L'}}</td>
             <td class="align-middle">{{status}}</td>
-            <td class="align-middle">{{id}}</td>
+            <!--<td class="align-middle">{{id}}</td>-->
             <td class="align-middle"><a href="/admin/posts/edit/{{id}}"
                    class="btn btn-info">Редагувати</a></td>
             <td class="align-middle">
