@@ -1,0 +1,18 @@
+<div class="row">
+    <div class="col-md-10 mx-auto">
+        <h3>Редагувати категорію</h3>
+        <form action="/admin/categories/edit/{{category.translitTitleCat}}?_method=PUT" method="post">
+            <div class="form-group">
+                <label for="name">Назва категорії</label>
+                <input type="text"
+                       class="form-control"
+                       name="name"
+                       placeholder="Введіть назву категорії"
+                       required
+                       value="{{category.name}}"
+                >
+            </div>
+            <button class="btn btn-primary">Оновити категорію</button>
+        </form>
+    </div>
+</div>

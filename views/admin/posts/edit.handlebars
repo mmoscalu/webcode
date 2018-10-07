@@ -1,5 +1,5 @@
 <h1>Редагувати запис</h1>
-<form action="/admin/posts/edit/{{post.id}}?_method=PUT" method="post" enctype="multipart/form-data">
+<form action="/admin/posts/edit/{{post.translitTitle}}?_method=PUT" method="post" enctype="multipart/form-data">
     <div class="form-group">
         <label for="title">Заголовок запису</label>
         <input name="title"
@@ -8,6 +8,19 @@
                id="title"
                value="{{post.title}}"
         >
+    </div>
+    <div class="form-group">
+        <label for="category">Категорія</label>
+        <select name="category"
+                id="category"
+                class="form-control"
+        >
+            {{#select post.category}}
+                {{#each categories}}
+                    <option value="{{id}}">{{name}}</option>
+                {{/each}}
+            {{/select}}
+        </select>
     </div>
     <div class="form-group">
         <label for="file">Завантажити головну фотографію</label>
@@ -31,7 +44,9 @@
     </div>
     <div class="form-group">
         <label for="description">Опис запису</label>
-        <textarea name="description"
+        <textarea
+                required
+                name="description"
                   class="form-control"
                   id="description"
                   cols="30"
@@ -39,5 +54,5 @@
         >{{post.description}}
         </textarea>
     </div>
-    <button class="btn btn-primary" type="submit">Зберегти</button>
+    <button class="btn btn-primary" type="submit">Оновити запис</button>
 </form>

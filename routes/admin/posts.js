@@ -1,8 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const Post = require('../../models/Post');
+const Category = require('../../models/Category');
 const { isEmpty, uploadDir } = require('../../helpers/upload-helpers');
 const fs = require('fs');
+const translit = require('cyrillic-to-translit-js');
 
 // set default admin layout router
 
@@ -18,6 +20,7 @@ router.all('/*', (req, res, next) => {
 router.get('/', (req, res) => {
 
     Post.find({})
+        .populate('category')
         .then(posts => {
             res.render('admin/posts', {posts: posts});
         });
@@ -27,7 +30,11 @@ router.get('/', (req, res) => {
 
 router.get('/new', (req, res) => {
 
-    res.render('admin/posts/new');
+    Category.find({}).then(categories => {
+
+        res.render('admin/posts/new', {categories: categories});
+
+    });
 
 });
 
@@ -48,9 +55,11 @@ router.post('/new', (req, res) => {
 
         const newPost = Post({
             title: req.body.title,
+            category: req.body.category,
             status: req.body.status,
             description: req.body.description,
-            file: filename
+            file: filename,
+            translitTitle: translit({ preset: "uk" }).transform(req.body.title.toLowerCase(), '-')
         });
 
         // save new post ob database
@@ -70,21 +79,28 @@ router.post('/new', (req, res) => {
 
 router.get('/edit/:id', (req, res) => {
 
-    Post.findOne({_id: req.params.id})
+    Post.findOne({translitTitle: req.params.id})
         .then(post => {
-            res.render('admin/posts/edit', {post: post});
+
+            Category.find({}).then(categories => {
+
+                res.render('admin/posts/edit', {post: post, categories: categories});
+
+            });
         });
 
 });
 
 router.put('/edit/:id', (req, res) => {
 
-    Post.findOne({_id: req.params.id})
+    Post.findOne({translitTitle: req.params.id})
         .then(post => {
 
             post.title = req.body.title;
+            post.category = req.body.category;
             post.status = req.body.status;
             post.description = req.body.description;
+            post.translitTitle = translit({ preset: "uk" }).transform(req.body.title.toLowerCase(), '-');
 
             if (!isEmpty(req.files)) {
 

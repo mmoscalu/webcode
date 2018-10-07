@@ -1,1 +1,51 @@
-<h1>Категорії</h1>
+<div class="row">
+    <div class="col-md-10 mx-auto">
+        <h3>Додати категорію</h3>
+        <form action="/admin/categories/new" method="post">
+            <div class="form-group">
+                <label for="name">Назва категорії</label>
+                <input type="text"
+                        class="form-control"
+                        name="name"
+                        placeholder="Введіть назву категорії"
+                       required
+                >
+            </div>
+            <button class="btn btn-primary">Зберегти</button>
+        </form>
+    </div>
+</div>
+<br>
+<hr>
+<div class="row">
+    <div class="col-md-10 mx-auto">
+        <h3>Категорії</h3>
+        <table class="table table-bordered">
+            <thead class="text-center">
+            <tr>
+                <th>Назва категорії</th>
+                <!--<th>Id</th>-->
+                <th>Дата</th>
+                <th>Редагування</th>
+                <th>Видалення</th>
+            </tr>
+            </thead>
+            <tbody class="text-center">
+            {{#each categories}}
+                <tr>
+                    <td>{{name}}</td>
+                    <!--<td>{{id}}</td>-->
+                    <td>{{generateDate date 'L'}}</td>
+                    <td><a href="/admin/categories/edit/{{translitTitleCat}}" class="btn btn-info">Редагувати</a></td>
+                    <td>
+                        <form action="/admin/categories/{{id}}?_method=DELETE" method="post">
+                            <button type="submit" class="btn btn-danger">Видалити</button>
+                        </form>
+                    </td>
+                </tr>
+            {{/each}}
+            </tbody>
+        </table>
+
+    </div>
+</div>

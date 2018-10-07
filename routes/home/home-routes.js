@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const Post = require('../../models/Post');
+const Category = require('../../models/Category');
+const User = require('../../models/User');
 
 // set default home layout router
 
@@ -15,7 +17,11 @@ router.get('/', (req, res) => {
 
     Post.find({}).then(posts => {
 
-        res.render('home/index', {posts: posts});
+        Category.find({}).then(categories => {
+
+            res.render('home/index', {posts: posts, categories: categories});
+
+        });
 
     });
 
@@ -23,10 +29,14 @@ router.get('/', (req, res) => {
 
 router.get('/post/:id', (req, res) => {
 
-    Post.findOne({_id: req.params.id})
+    Post.findOne({translitTitle: req.params.id})
         .then(post => {
 
-            res.render('home/post', {post: post});
+            Category.find({}).then(categories =>{
+
+                res.render('home/post', {post: post, categories: categories});
+
+            });
 
         });
 });
@@ -48,7 +58,30 @@ router.get('/contacts', (req, res) => {
 });
 
 router.get('/register', (req, res) => {
+
     res.render('home/register');
+
+});
+
+router.post('/register', (req, res) => {
+
+    const newUser = new User({
+
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        email: req.body.email,
+        password: req.body.password
+
+    });
+
+    newUser.save().then(savedUser => {
+
+        res.redirect('/');
+
+    });
+
+
+
 });
 
 router.get('/login', (req, res) => {
