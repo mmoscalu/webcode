@@ -27,6 +27,7 @@ mongoose.connect('mongodb://localhost:27017/web_design_db', {
 
 // add folder public
 
+// app.use(express.static('public'));
 app.use(express.static(path.join(__dirname, 'public')));
 
 // set view engine

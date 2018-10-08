@@ -3,6 +3,7 @@ const router = express.Router();
 const Post = require('../../models/Post');
 const Category = require('../../models/Category');
 const User = require('../../models/User');
+const bcrypt = require('bcryptjs');
 
 // set default home layout router
 
@@ -74,13 +75,23 @@ router.post('/register', (req, res) => {
 
     });
 
-    newUser.save().then(savedUser => {
+    bcrypt.genSalt(10, (err, salt) => {
 
-        res.redirect('/');
+        bcrypt.hash(newUser.password, salt, (err, hash) => {
+
+            newUser.password = hash;
+
+            newUser.save().then(savedUser => {
+
+                req.flash('success_message', 'Ви зареєстровані, будь ласка увійдіть');
+
+                res.redirect('/login');
+
+            });
+
+        })
 
     });
-
-
 
 });
 

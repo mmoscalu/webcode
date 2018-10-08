@@ -1,0 +1,33 @@
+/* ===== Custom Style Start  ===== */
+body {
+    background-image: url('/uploads/img/bg.jpg');
+    background-repeat: repeat, repeat;
+}
+.section-home + .section-home {
+    margin-top: 50px;
+}
+.shadow-section {
+    box-shadow: 7px 10px 20px 10px rgba(0,0,0,.4);
+}
+.text-shadow {
+    text-shadow: 2px 2px rgba(0,0,0,.4);
+}
+/* ===== Custom Style End  ===== */
+/* ===== Inner Start  ===== */
+.inner-bg {
+    background-image: url('/uploads/img/inner-bgV2.jpg');
+    background-repeat: repeat, repeat;
+}
+/* ===== Inner End  ===== */
+/* ===== Services Start  ===== */
+.services-text {
+    /*z-index: 999;*/
+    /*top: 20%;*/
+    background-image: url('/uploads/img/services.jpg');
+    background-repeat: repeat, repeat;
+}
+.services-text .row + .row {
+    margin-top: 15px;
+}
+/* ===== Services End  ===== */
+

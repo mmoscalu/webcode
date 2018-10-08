@@ -1,41 +1,47 @@
-<div class="card card-register mx-auto mt-5">
-    <div class="card-header">Register an Account</div>
-    <div class="card-body">
-        <form action="/register" method="post">
-            <div class="form-group">
-                <div class="form-row">
-                    <div class="col-md-6">
-                        <label for="exampleInputName">First name</label>
-                        <input value="{{firstName}}" required name="firstName" class="form-control" id="exampleInputName" type="text" aria-describedby="nameHelp" placeholder="Enter first name">
+<div>
+    <div class="col-md-12 p-0">
+        {{> home/home-nav}}
+        <!--<img class="shadow-section" src="/uploads/img/inner-bgV2.jpg" style="width: 100%" alt="">-->
+        <div class="card card-register mx-auto mt-5">
+            <div class="card-header">Реєстрація</div>
+            <div class="card-body">
+                <form action="/register" method="post">
+                    <div class="form-group">
+                        <div class="form-row">
+                            <div class="col-md-6">
+                                <label for="exampleInputName">Ім'я</label>
+                                <input value="{{firstName}}" required name="firstName" class="form-control" id="exampleInputName" type="text" aria-describedby="nameHelp" placeholder="Введіть ім'я">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="exampleInputLastName">Призвіще</label>
+                                <input value="{{lastName}}" required name="lastName" class="form-control" id="exampleInputLastName" type="text" aria-describedby="nameHelp" placeholder="Введіть призвіще">
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-md-6">
-                        <label for="exampleInputLastName">Last name</label>
-                        <input value="{{lastName}}" required name="lastName" class="form-control" id="exampleInputLastName" type="text" aria-describedby="nameHelp" placeholder="Enter last name">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Електронна адреса</label>
+                        <input value="{{email}}" required name="email" class="form-control" id="exampleInputEmail1" type="email" aria-describedby="emailHelp" placeholder="Введіть електронну адресу">
                     </div>
+                    <div class="form-group">
+                        <div class="form-row">
+                            <div class="col-md-6">
+                                <label for="exampleInputPassword1">Пароль</label>
+                                <input required name="password" class="form-control" id="exampleInputPassword1" type="password" placeholder="Введіть пароль">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="exampleConfirmPassword">Підтвердження пароля</label>
+                                <input required name="passwordConfirm" class="form-control" id="exampleConfirmPassword" type="password" placeholder="Введіть пароль ще раз">
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Зареєструватися</button>
+                </form>
+                <div class="text-center">
+                    <a class="d-block small mt-3" href="/login">Увійти</a>
+                    <a class="d-block small" href="/">Відновити пароль</a>
+                    <a class="d-block small" href="/">Головна</a>
                 </div>
             </div>
-            <div class="form-group">
-                <label for="exampleInputEmail1">Email address</label>
-                <input value="{{email}}" required name="email" class="form-control" id="exampleInputEmail1" type="email" aria-describedby="emailHelp" placeholder="Enter email">
-            </div>
-            <div class="form-group">
-                <div class="form-row">
-                    <div class="col-md-6">
-                        <label for="exampleInputPassword1">Password</label>
-                        <input required name="password" class="form-control" id="exampleInputPassword1" type="password" placeholder="Password">
-                    </div>
-                    <div class="col-md-6">
-                        <label for="exampleConfirmPassword">Confirm password</label>
-                        <input required name="passwordConfirm" class="form-control" id="exampleConfirmPassword" type="password" placeholder="Confirm password">
-                    </div>
-                </div>
-            </div>
-            <button type="submit" class="btn btn-primary btn-block">Register</button>
-        </form>
-        <div class="text-center">
-            <a class="d-block small mt-3" href="/login">Login Page</a>
-            <a class="d-block small" href="forgot-password.html">Forgot Password?</a>
-            <a class="d-block small" href="/">Home Page?</a>
         </div>
     </div>
 </div>
