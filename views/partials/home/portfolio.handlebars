@@ -1,0 +1,31 @@
+<div class="col-md-12 p-0 text-white text-center">
+    <div class="shadow-section portfolio-section text-center text-white p-5">
+        <h1>Портфоліо</h1>
+        <nav class="d-flex justify-content-center">
+            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                <a class="nav-item nav-link text-white" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Всі роботи</a>
+                <a class="nav-item nav-link text-white" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Web Design</a>
+                <a class="nav-item nav-link text-white" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Graphic</a>
+            </div>
+        </nav>
+        <div class="tab-content" id="nav-tabContent">
+            <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                <div class="row">
+                    {{#each portfolios}}
+                    <div class="col-md-4 mt-3">
+                        <a class="text-white" href="{{link}}" target="_blank">
+                            <img class="img-thumbnail" src="/uploads/img/{{file}}" alt="">
+                            <p>{{description}}</p>
+                            <span>{{title}}</span>
+                        </a>
+                    </div>
+                    {{/each}}
+                </div>
+                    <!--/row-->
+            </div>
+            <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">...</div>
+            <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">...</div>
+        </div>
+
+    </div>
+</div>

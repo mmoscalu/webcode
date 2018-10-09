@@ -1,0 +1,34 @@
+<h1>Всі портфоліо</h1>
+<table class="table table-bordered">
+                <thead>
+                <tr class="text-center align-middle">
+                    <th>Заголовок</th>
+                    <th>Посилання</th>
+                    <th>Зображення</th>
+                    <!--<th>Категорія</th>-->
+                    <!--<th>Дата створення</th>-->
+                    <th>Редагування</th>
+                    <th>Видалення</th>
+                </tr>
+                </thead>
+                <tbody>
+                {{#each portfolios}}
+                    <tr>
+                        <td class="align-middle">{{title}}</td>
+                        <td class="align-middle"><a href="{{link}}" target="_blank">{{link}}</a></td>
+                        <td><img class="img-thumbnail" src="/uploads/img/{{file}}" alt="{{file}}"></td>
+                        <!--<td class="align-middle text-center">{{category}}</td>-->
+                        <!--<td class="align-middle text-center">{{generateDate date 'L'}}</td>-->
+                        <td class="align-middle"><a href="/admin/portfolios/edit/{{id}}"
+                                                    class="btn btn-info">Редагувати</a></td>
+                        <td class="align-middle">
+
+                            <form action="/admin/portfolios/{{id}}?_method=DELETE" method="post">
+                                <button type="submit" class="btn btn-danger">Видалити</button>
+                            </form>
+
+                        </td>
+                    </tr>
+                {{/each}}
+                </tbody>
+            </table>

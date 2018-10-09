@@ -76,6 +76,8 @@ const homeRoutes = require('./routes/home/home-routes');
 const adminRoutes = require('./routes/admin/admin-routes');
 const post = require('./routes/admin/posts');
 const categories = require('./routes/admin/categories');
+const portfolios = require('./routes/admin/portfolios');
+const portfoliosCategories = require('./routes/admin/portfolios-categories');
 
 // use routes
 
@@ -83,3 +85,5 @@ app.use('/', homeRoutes);
 app.use('/admin', adminRoutes);
 app.use('/admin/posts', post);
 app.use('/admin/categories', categories);
+app.use('/admin/portfolios', portfolios);
+app.use('/admin/portfolios-categories', portfoliosCategories);

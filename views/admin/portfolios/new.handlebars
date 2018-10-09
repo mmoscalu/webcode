@@ -1,0 +1,58 @@
+<h1>Додати нову роботу</h1>
+<form action="/admin/portfolios/new" method="post" enctype="multipart/form-data">
+    <div class="form-group">
+        <label for="title">Назва роботи</label>
+        <input name="title"
+               type="text"
+               class="form-control"
+               id="title"
+               placeholder="Введіть назву роботи"
+               required
+        >
+    </div>
+    <div class="form-group">
+        <label for="link">Посилання роботи</label>
+        <input name="link"
+               type="text"
+               class="form-control"
+               id="link"
+               placeholder="Введіть посилання роботи"
+               required
+        >
+    </div>
+    <div class="form-group">
+        <label for="category">Категорія</label>
+        <select name="category"
+                id="category"
+                class="form-control"
+
+        >
+            {{#each portfoliosCategories}}
+                <option value="{{id}}">{{name}}</option>
+            {{/each}}
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="file">Завантажити фотографію</label>
+        <input name="file"
+               type="file"
+               class="form-control"
+               required
+        >
+    </div>
+    <div class="form-group">
+        <label for="description">Опис роботи</label>
+        <textarea
+                required
+                name="description"
+                class="form-control"
+                id="description"
+                cols="30"
+                rows="10"
+                placeholder="Введіть опис роботи"
+
+        >
+        </textarea>
+    </div>
+    <button class="btn btn-primary" type="submit">Зберегти</button>
+</form>

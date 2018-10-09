@@ -1,4 +1,7 @@
 /* ===== Custom Style Start  ===== */
+a:hover {
+    text-decoration: none;
+}
 body {
     background-image: url('/uploads/img/bg.jpg');
     background-repeat: repeat, repeat;
@@ -30,4 +33,11 @@ body {
     margin-top: 15px;
 }
 /* ===== Services End  ===== */
-
+/* ===== Portfolio Start ===== */
+.portfolio-section {
+    background-image: url('/uploads/img/portfolioV1.jpg');
+    background-repeat: repeat, repeat;
+}
+.portfolio-section .active {
+    color: black !important;
+}

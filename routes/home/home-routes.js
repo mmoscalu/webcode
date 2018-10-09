@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const Post = require('../../models/Post');
 const Category = require('../../models/Category');
+const Portfolio = require('../../models/Portfolio');
 const User = require('../../models/User');
 const bcrypt = require('bcryptjs');
 
@@ -20,7 +21,17 @@ router.get('/', (req, res) => {
 
         Category.find({}).then(categories => {
 
-            res.render('home/index', {posts: posts, categories: categories});
+            Portfolio.find({}).then(portfolios => {
+
+                res.render('home/index', {
+                    posts: posts,
+                    categories: categories,
+                    portfolios: portfolios
+                });
+
+            });
+
+
 
         });
 
@@ -47,7 +58,13 @@ router.get('/services', (req, res) => {
 });
 
 router.get('/portfolio', (req, res) => {
-    res.render('home/portfolio');
+
+    Portfolio.find({}).then(portfolios => {
+
+        res.render('home/portfolio', {portfolios: portfolios})
+
+    });
+
 });
 
 router.get('/about', (req, res) => {
