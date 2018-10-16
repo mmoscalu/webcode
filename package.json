@@ -12,6 +12,7 @@
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.3",
+    "chart.js": "^2.7.3",
     "connect-flash": "^0.1.1",
     "cyrillic-to-translit-js": "^2.1.0",
     "express": "^4.16.3",
@@ -22,6 +23,9 @@
     "method-override": "^3.0.0",
     "moment": "^2.22.2",
     "moment-datetime": "0.0.2",
-    "mongoose": "^5.3.1"
+    "mongoose": "^5.3.1",
+    "mongoose-url-slugs": "^1.0.2",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0"
   }
 }

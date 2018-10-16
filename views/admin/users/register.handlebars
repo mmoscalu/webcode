@@ -1,26 +1,25 @@
 <div>
     <div class="col-md-12 p-0">
         {{> home/home-nav}}
-        <!--<img class="shadow-section" src="/uploads/img/inner-bgV2.jpg" style="width: 100%" alt="">-->
         <div class="card card-register mx-auto mt-5">
             <div class="card-header">Реєстрація</div>
             <div class="card-body">
-                <form action="/register" method="post">
+                <form action="/admin/users/register" method="post">
                     <div class="form-group">
                         <div class="form-row">
                             <div class="col-md-6">
                                 <label for="exampleInputName">Ім'я</label>
-                                <input value="{{firstName}}" required name="firstName" class="form-control" id="exampleInputName" type="text" aria-describedby="nameHelp" placeholder="Введіть ім'я">
+                                <input required value="{{firstName}}" name="firstName" class="form-control" id="exampleInputName" type="text" aria-describedby="nameHelp" placeholder="Введіть ім'я">
                             </div>
                             <div class="col-md-6">
                                 <label for="exampleInputLastName">Призвіще</label>
-                                <input value="{{lastName}}" required name="lastName" class="form-control" id="exampleInputLastName" type="text" aria-describedby="nameHelp" placeholder="Введіть призвіще">
+                                <input required value="{{lastName}}" name="lastName" class="form-control" id="exampleInputLastName" type="text" aria-describedby="nameHelp" placeholder="Введіть призвіще">
                             </div>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="exampleInputEmail1">Електронна адреса</label>
-                        <input value="{{email}}" required name="email" class="form-control" id="exampleInputEmail1" type="email" aria-describedby="emailHelp" placeholder="Введіть електронну адресу">
+                        <input required value="{{email}}" name="email" class="form-control" id="exampleInputEmail1" type="email" aria-describedby="emailHelp" placeholder="Введіть електронну адресу">
                     </div>
                     <div class="form-group">
                         <div class="form-row">

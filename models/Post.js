@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const UrlSlug = require('mongoose-url-slugs');
 
 const PostSchema = new Schema({
 
@@ -30,7 +31,13 @@ const PostSchema = new Schema({
     },
     translitTitle: {
         type: String
+    },
+    slug: {
+        type: String
     }
+
 });
+
+PostSchema.plugin(UrlSlug('translitTitle', {field: 'slug'}));
 
 module.exports = mongoose.model('Post', PostSchema);

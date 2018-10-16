@@ -8,17 +8,19 @@ const methodOverride = require('method-override');
 const upload = require('express-fileupload');
 const session = require('express-session');
 const flash = require('connect-flash');
+const {mongoDbUrl} =require('./config/database');
+const passport = require('passport');
 
 // listen port
-app.listen(4500, () => {
-    console.log(`listen on port 4500`);
+app.listen(3000, () => {
+    console.log(`listen on port 3000`);
 });
 
 // connect db
 
 mongoose.Promise = global.Promise;
 
-mongoose.connect('mongodb://localhost:27017/web_design_db', {
+mongoose.connect(mongoDbUrl, {
     useNewUrlParser: true
 })
     .then((db) => {
@@ -59,13 +61,21 @@ app.use(session({
     saveUninitialized: true
 }));
 
+// passport init
+
+app.use(passport.initialize());
+app.use(passport.session());
+
 app.use(flash());
 
 // set local variable flash success
 
 app.use((req, res, next) => {
 
+    res.locals.user = req.user || null;
     res.locals.success_message = req.flash('success_message');
+    res.locals.errors_message = req.flash('errors_message');
+    res.locals.error = req.flash('error');
 
     next();
 
@@ -78,6 +88,7 @@ const post = require('./routes/admin/posts');
 const categories = require('./routes/admin/categories');
 const portfolios = require('./routes/admin/portfolios');
 const portfoliosCategories = require('./routes/admin/portfolios-categories');
+const users = require('./routes/admin/users');
 
 // use routes
 
@@ -87,3 +98,4 @@ app.use('/admin/posts', post);
 app.use('/admin/categories', categories);
 app.use('/admin/portfolios', portfolios);
 app.use('/admin/portfolios-categories', portfoliosCategories);
+app.use('/admin/users', users);

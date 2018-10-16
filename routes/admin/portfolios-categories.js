@@ -1,9 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const PortfolioCategory = require('../../models/Portfolio-Category');
+const {userAuth} = require('../../helpers/authentication');
 
 // set default admin layout router
-router.all('/*', (req, res, next) => {
+router.all('/*', userAuth, (req, res, next) => {
 
     req.app.locals.layout = 'admin';
     next();

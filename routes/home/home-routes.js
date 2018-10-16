@@ -5,6 +5,8 @@ const Category = require('../../models/Category');
 const Portfolio = require('../../models/Portfolio');
 const User = require('../../models/User');
 const bcrypt = require('bcryptjs');
+const passport = require('passport');
+const LocalStrategy = require('passport-local').Strategy;
 
 // set default home layout router
 
@@ -31,17 +33,15 @@ router.get('/', (req, res) => {
 
             });
 
-
-
         });
 
     });
 
 });
 
-router.get('/post/:id', (req, res) => {
+router.get('/post/:slug', (req, res) => {
 
-    Post.findOne({translitTitle: req.params.id})
+    Post.findOne({slug: req.params.slug})
         .then(post => {
 
             Category.find({}).then(categories =>{
@@ -75,45 +75,75 @@ router.get('/contacts', (req, res) => {
     res.render('home/contacts');
 });
 
-router.get('/register', (req, res) => {
 
-    res.render('home/register');
 
-});
+// app login
 
-router.post('/register', (req, res) => {
+passport.use(new LocalStrategy({usernameField: 'email'}, (email, password, done) => {
 
-    const newUser = new User({
+    User.findOne({email: email}).then(user => {
 
-        firstName: req.body.firstName,
-        lastName: req.body.lastName,
-        email: req.body.email,
-        password: req.body.password
+        if (!user) return done(null, false, {message: 'Користувача не знайдено'});
 
-    });
+        bcrypt.compare(password, user.password, (err, matched) => {
 
-    bcrypt.genSalt(10, (err, salt) => {
+            if (err) return err;
 
-        bcrypt.hash(newUser.password, salt, (err, hash) => {
+            if (matched) {
 
-            newUser.password = hash;
+                return done(null, user);
 
-            newUser.save().then(savedUser => {
+            }  else {
 
-                req.flash('success_message', 'Ви зареєстровані, будь ласка увійдіть');
+                return done(null, false, {message: 'Пароль не вірний'});
 
-                res.redirect('/login');
-
-            });
+            }
 
         })
 
-    });
+    })
+
+}));
+
+passport.serializeUser(function(user, done) {
+
+    done(null, user.id);
 
 });
 
+passport.deserializeUser(function(id, done) {
+
+    User.findById(id, function(err, user) {
+
+        done(err, user);
+
+    });
+});
+
+
 router.get('/login', (req, res) => {
+
     res.render('home/login');
+
+});
+
+router.post('/login', (req, res, next) => {
+
+    passport.authenticate('local', {
+
+        successRedirect: '/admin',
+        failureRedirect: '/login',
+        failureFlash: true
+
+    })(req, res, next);
+
+});
+
+router.get('/logout', (req, res) => {
+
+    req.logout();
+    res.redirect('/');
+
 });
 
 module.exports = router;

@@ -5,10 +5,11 @@ const Category = require('../../models/Category');
 const { isEmpty, uploadDir } = require('../../helpers/upload-helpers');
 const fs = require('fs');
 const translit = require('cyrillic-to-translit-js');
+const {userAuth} = require('../../helpers/authentication');
 
 // set default admin layout router
 
-router.all('/*', (req, res, next) => {
+router.all('/*', userAuth, (req, res, next) => {
 
     req.app.locals.layout = 'admin';
     next();
@@ -77,9 +78,9 @@ router.post('/new', (req, res) => {
 
 // edit post
 
-router.get('/edit/:id', (req, res) => {
+router.get('/edit/:slug', (req, res) => {
 
-    Post.findOne({translitTitle: req.params.id})
+    Post.findOne({slug: req.params.slug})
         .then(post => {
 
             Category.find({}).then(categories => {
@@ -91,9 +92,9 @@ router.get('/edit/:id', (req, res) => {
 
 });
 
-router.put('/edit/:id', (req, res) => {
+router.put('/edit/:slug', (req, res) => {
 
-    Post.findOne({translitTitle: req.params.id})
+    Post.findOne({slug: req.params.slug})
         .then(post => {
 
             post.title = req.body.title;

@@ -1,0 +1,23 @@
+<div class="col-md-12">
+    <a class="btn btn-primary" href="/admin/users/register">Додати нового користувача</a>
+    <table class="table table-bordered mt-2 text-center">
+        <thead>
+        <tr>
+            <th>Ім`я</th>
+            <th>Прізвище</th>
+            <th>E-mail</th>
+            <th>Дата</th>
+        </tr>
+        </thead>
+        <tbody>
+        {{#each users}}
+            <tr>
+                <td>{{firstName}}</td>
+                <td>{{lastName}}</td>
+                <td>{{email}}</td>
+                <td>{{generateDate date 'L'}}</td>
+            </tr>
+        {{/each}}
+        </tbody>
+    </table>
+</div>
