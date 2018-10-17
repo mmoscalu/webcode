@@ -17,9 +17,16 @@ module.exports = {
 
     },
 
-    titleTranslit: function (title) {
+    // titleTranslit: function (title) {
+    //
+    //     return translit({ preset: "uk" }).transform(title, '-');
+    //
+    // }
 
-        return translit({ preset: "uk" }).transform(title, '-');
+    shortDescription: function (string) {
+
+        return string.substring(0, 250) + " ...";
 
     }
+
 };

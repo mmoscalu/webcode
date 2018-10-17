@@ -35,9 +35,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 // set view engine
 
 
-const {select, generateDate, titleTranslit} = require('./helpers/handlebars-helpers'); // get helpers function
+const {select, generateDate, shortDescription} = require('./helpers/handlebars-helpers'); // get helpers function
 
-app.engine('handlebars', expressHandlebars({defaultLayout: 'home', helpers: {select: select, generateDate: generateDate, titleTranslit: titleTranslit}}));
+app.engine('handlebars', expressHandlebars({defaultLayout: 'home', helpers: {select: select, generateDate: generateDate, shortDescription: shortDescription}}));
 app.set('view engine', 'handlebars');
 
 // set uploads middleware

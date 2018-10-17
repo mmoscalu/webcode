@@ -30,7 +30,7 @@
     <div class="row">
 
         <!-- Post Content Column -->
-        <div class="col-lg-8">
+        <div class="col-md-12 mx-auto bg-light shadow-section mb-5">
 
             <!-- Title -->
             <h1 class="mt-4">{{post.title}}</h1>
@@ -41,19 +41,12 @@
             <hr>
 
             <!-- Preview Image -->
-            <img class="img-fluid rounded" src="/uploads/img/{{post.file}}" alt="">
+            <img class="img-fluid rounded d-flex mr-auto ml-auto" src="/uploads/img/{{post.file}}" alt="">
 
             <hr>
 
             <!-- Post Content -->
-            <p class="lead">{{post.description}}</p>
-
-        </div>
-
-        <!-- Sidebar Widgets Column -->
-        <div class="col-md-4">
-
-            {{>home/sidebar}}
+            <p class="lead text-justify">{{post.description}}</p>
 
         </div>
 

@@ -24,27 +24,28 @@
 </section>
 <div class="row">
     <!-- Blog Entries Column -->
-    <div class="col-md-8">
-
-        <h1 class="my-4">Home Page
-            <small>Secondary Text</small>
-        </h1>
-
+    <div class="col-md-12 mt-5">
+        <div class="row">
         <!-- Blog Post -->
-        {{#each posts}}
-        <div class="card mb-4">
-            <img class="card-img-top" src="/uploads/img/{{file}}" alt="Card image cap">
-            <div class="card-body">
-                <h2 class="card-title">{{title}}</h2>
-                <p class="card-text">{{description}}</p>
-                <a href="/post/{{slug}}" class="btn btn-primary">Читати далі &rarr;</a>
-            </div>
-            <div class="card-footer text-muted">
-                Опубліковано {{generateDate date 'LL'}}.
-                <a href="#">WebStudio-Design</a>
-            </div>
+            {{#each posts}}
+
+                <div class="col-md-4">
+                    <div class="card mb-4 shadow-section">
+                        <img class="card-img-top" style="width: 100%; height: 200px" src="/uploads/img/{{file}}" alt="Card image cap">
+                        <div class="card-body">
+                            <h5 class="card-title text-center">{{title}}</h5>
+                            <p class="card-text text-justify">{{shortDescription description}}</p>
+                            <a href="/post/{{slug}}" class="btn btn-primary">Читати далі &rarr;</a>
+                        </div>
+                        <div class="card-footer text-muted text-center">
+                            Опубліковано {{generateDate date 'LL'}}.
+                        </div>
+                    </div>
+                </div>
+
+
+            {{/each}}
         </div>
-        {{/each}}
 
         <!-- Pagination -->
         <ul class="pagination justify-content-center mb-4">
@@ -55,13 +56,6 @@
                 <a class="page-link" href="#">Newer &rarr;</a>
             </li>
         </ul>
-
-    </div>
-
-    <!-- Sidebar Widgets Column -->
-    <div class="col-md-4">
-
-        {{>home/sidebar}}
 
     </div>
 
